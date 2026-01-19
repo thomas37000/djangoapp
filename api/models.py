@@ -19,7 +19,11 @@ class User(models.Model):
 
 class UsersList(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
 
+    def __str__(self): # afficher le nom de la liste dans l'admin et le filtre de Users par UsersList
+        return self.name
+    
     class Meta:
         verbose_name = "User List"
         verbose_name_plural = "Users List"
