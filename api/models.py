@@ -45,3 +45,30 @@ class Episode(models.Model):
 
     def __str__(self):
         return self.name + " (" + str(self.duration) + " min)"
+
+class Actor(models.Model):
+    actor_name = models.CharField(max_length=100, null=False)
+    name = models.CharField(max_length=100, null=False)
+    lastname = models.CharField(max_length=100, null=False)
+    image = models.FileField(upload_to="public", null=True)
+    season = models.ForeignKey(
+        Season, null=False, on_delete=models.CASCADE
+    )  # CASCADE, si on éfface la saison on éfface tous les acteurs associés
+
+    def __str__(self):
+        return self.name + " " + self.lastname
+
+    ActorsList = models.ForeignKey(
+        "ActorsList", null=False, on_delete=models.CASCADE
+    )
+
+class ActorsList(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Actor List"
+        verbose_name_plural = "Actors List"
