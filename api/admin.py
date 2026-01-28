@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, UsersList
+from .models import User, UsersList, Season, Episode 
 
 
 class UserInline(admin.TabularInline):  # afficher tous les users dans UserList
@@ -26,3 +26,16 @@ class UserAdmin(admin.ModelAdmin):
 
     list_filter = ("UsersList", )  # filtrer par UsersList
     search_fields = ("name", "email")  # recherche par nom ou email
+
+@admin.register(Season)
+class SeasonsAdmin(admin.ModelAdmin):
+    list_display = ("name", "year")
+    ordering = ("name",)
+
+@admin.register(Episode)
+class EpisodesAdmin(admin.ModelAdmin):
+    list_display = ("title", "name", "duration", "season")
+    ordering = ("name",)
+
+    list_filter = ("season", )  # filtrer par saison
+    search_fields = ("name", "title")  # recherche par nom ou titre

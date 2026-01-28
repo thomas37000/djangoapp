@@ -27,3 +27,21 @@ class UsersList(models.Model):
     class Meta:
         verbose_name = "User List"
         verbose_name_plural = "Users List"
+
+class Season(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    year = models.IntegerField(null=False)
+
+    def __str__(self):
+        return self.name + " " + str(self.year)
+    
+class Episode(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    duration = models.IntegerField(null=False)  # duration in minutes
+    title = models.CharField(max_length=255, null=True)
+    season = models.ForeignKey(
+        Season, null=False, on_delete=models.CASCADE
+    )  # CASCADE, si on éfface la saison on éfface tous les épisodes associés
+
+    def __str__(self):
+        return self.name + " (" + str(self.duration) + " min)"

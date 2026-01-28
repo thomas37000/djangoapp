@@ -60,6 +60,7 @@ DATABASES = {
 
     pip install -r requirements.txt
     pip install psycopg2-binary
+    pip install djangorestframework
     python -m pip install python-dotenv
 
 6/ créer le serializers.py dans /api pour créer les champs d’une ou plusieurs tables et refresh dans pgadmin4
